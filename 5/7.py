@@ -13,7 +13,7 @@ class Czlowiek:
     def diff_to_norm(self):
         if self.count_bmi() >= 25:
             return (self.count_bmi()-25)*((self.wzrost/100) ** 2)
-        elif self. count_bmi() <= 18.5:
+        elif self. count_bmi() < 18.5:
             return (18.5-self.count_bmi())*((self.wzrost/100) ** 2)
         else:
             return 0
@@ -40,17 +40,16 @@ class Czlowiek:
         kcal = self.diff_to_norm() * 6000
         if activity == "chocolate":
             return kcal * (450/100)
-        elif activity == "bike":
-            return kcal / 600
-        elif activity == "hobby":
-            return kcal / 250
-        elif activity == "chess":
-            return kcal / 150
+        elif activity == "potato":
+            return kcal * (80/100)
         else:
-            return "That's REALLY REALLY odd activity"
+            return "Are you sure you want to eat it?"
 
     def what_to_do(self):
-        pass
+        if self.count_bmi() >= 25:
+            print("Musisz schudnąć " + str(self.diff_to_norm()) + "kg")
+        if self.count_bmi() < 18.5:
+            print("Musisz przytyć "+str(self.diff_to_norm())+"kg")
 
 class Polityk(Czlowiek):
     def speak(self):
@@ -63,5 +62,4 @@ class Polityk(Czlowiek):
         return True
 
 adam = Czlowiek("Adam", 250, 70)
-print(adam.diff_to_norm())
-print(adam.to_eat("chocolate"))
+adam.what_to_do()
